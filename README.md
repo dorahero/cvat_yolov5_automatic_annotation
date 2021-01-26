@@ -5,7 +5,7 @@
 - [x] automatic-annotation
 
 # Usage cvat:
-[cvat](https://github.com/openvinotoolkit/cvat)
+[cvat](https://github.com/openvinotoolkit/cvat)  
 [automatic-annotation](https://github.com/openvinotoolkit/cvat/tree/develop/serverless/tensorflow/faster_rcnn_inception_v2_coco/nuclio)
 ## Build all cvat server
 ```shell
