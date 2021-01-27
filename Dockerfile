@@ -9,5 +9,3 @@ WORKDIR /opt/nuclio
 
 COPY . /opt/nuclio
 RUN pip install -r requirements.txt
-
-COPY /home/ub/model/car288_0121_last.pb /opt/nuclio/model.pb

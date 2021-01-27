@@ -15,6 +15,12 @@ docker-compose -f docker-compose.yml -f components/serverless/docker-compose.ser
 ```
 ## automatic-annotation
 ```shell
+mkdir serverless/tensorflow/yolov5/
+cd serverless/tensorflow/yolov5/
+git clone https://github.com/dorahero/cvat_yolov5_automatic_annotation.git
+mv cvat_yolov5_automatic_annotation nuclio
+cd nuclio
+cp ~/model/example.pb model.pb
 docker build -t dorahero2727/cvat-cu10:v1 .
 nuctl create project cvat
 nuctl deploy tf-yolov5-gpu   --project-name cvat --path "serverless/tensorflow/yolov5/nuclio" --platform local   --base-image  dorahero2727/cvat-cu10:v1   --desc "YOLOv5 tensorflow" -i dorahero2727/cvat-cu10:v2 --resource-limit nvidia.com/gpu=1
