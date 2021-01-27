@@ -39,10 +39,10 @@ def handler(context, event):
         if len(det):
             det[:, :4] = scale_coords((640, 640, 3), det[:, :4], (max_size, max_size, 3)).round()
         for *xyxy, conf, cls in reversed(det):
-            xtl = float(xyxy[3])
-            ytl = float(xyxy[2])
-            xbr = float(xyxy[1])
-            ybr = float(xyxy[0])
+            xtl = float(xyxy[0])
+            ytl = float(xyxy[1])
+            xbr = float(xyxy[2])
+            ybr = float(xyxy[3])
             obj_score = str(conf)
             obj_class = int(cls)
             obj_label = context.user_data.labels.get(obj_class, "unknown")
