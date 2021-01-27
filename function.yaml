@@ -305,30 +305,14 @@ spec:
 
   build:
     image: dorahero2727/yolov5-cvat:v2
-    baseImage: tensorflow/tensorflow:2.4.0-gpu
+    baseImage: dorahero2727/cvat-cu11:v1
 
     directives:
-      preCopy:
-        - kind: WORKDIR
-          value: /opt/nuclio
-        - kind: COPY
-          value: /home/ub/model/car288_0121_last.pb /opt/nuclio/model.pb
-
       postCopy:
         - kind: RUN
-          value: apt-get -y install git
+          value: export CUDA_VISIBLE_DEVICES=1
         - kind: RUN
-          value: apt update
-        - kind: RUN
-          value: apt install -y libgl1-mesa-glx
-        - kind: RUN
-          value: git clone https://github.com/dorahero/cvat_yolov5_automatic_annotation.git
-        - kind: RUN
-          value: cp -r cvat_yolov5_automatic_annotation/* .
-        - kind: RUN
-          value: pip install -r requirements.txt
-        # - kind: RUN
-        #   value: pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+          value: pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
   triggers:
     myHttpTrigger:
