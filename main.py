@@ -16,7 +16,7 @@ def init_context(context):
     setattr(context.user_data, 'model_handler', model_handler)
     functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))
     labels_spec = functionconfig['metadata']['annotations']['spec']
-    labels = {item['_id']: item['name'] for item in json.loads(labels_spec)}
+    labels = {str(item['_id']): item['name'] for item in json.loads(labels_spec)}
     setattr(context.user_data, "labels", labels)
     context.logger.info("Init context...100%")
 
@@ -44,8 +44,8 @@ def handler(context, event):
             xbr = float(xyxy[2])
             ybr = float(xyxy[3])
             obj_score = str(conf)
-            obj_class = int(cls)
-            obj_label = context.user_data.labels.get(obj_class, "unknown")
+            obj_class = str(int(cls))
+            obj_label = context.user_data.labels.get(obj_class)
             results.append({
                 "confidence": str(obj_score),
                 "label": obj_label,
