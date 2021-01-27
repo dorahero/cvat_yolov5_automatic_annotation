@@ -40,13 +40,13 @@ class ModelLoader:
         back[:height, :width] = image_np 
         # cv2.imwrite('test.jpg', back)
         imgsz = 640
-        img = torch.zeros((1, 3, imgsz, imgsz), device=torch.device('cuda'))
+        img = torch.zeros((1, 3, imgsz, imgsz), device=torch.device('cpu'))
         img = letterbox(back, new_shape=imgsz)[0]
 
         # Convert
         img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to 3x416x416
         img = np.ascontiguousarray(img)
-        img = torch.from_numpy(img).to(torch.device('cuda'))
+        img = torch.from_numpy(img).to(torch.device('cpu'))
         img = img.float()  # uint8 to fp16/32
         img /= 255.0  # 0 - 255 to 0.0 - 1.0
         if img.ndimension() == 3:
