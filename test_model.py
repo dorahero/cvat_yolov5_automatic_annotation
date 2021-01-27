@@ -12,12 +12,12 @@ from model_loader import ModelLoader
 import os 
 
 # os.environ["CUDA_VISIBLE_DEVICES"]="2"
-model_path = "/opt/nuclio/model.pb"
+model_path = "model.pb"
 model_handler = ModelLoader(model_path)
-functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))
+functionconfig = yaml.safe_load(open("function.yaml"))
 labels_spec = functionconfig['metadata']['annotations']['spec']
 labels = {item['_id']: item['name'] for item in json.loads(labels_spec)}
-image = Image.open('zinger_2016_gray_20201027_01_n-00089.jpg')
+image = Image.open('tiida5d_2006_metal_20201029_01_n-00003.jpg')
 w, h = image.size
 max_size = max(w, h)
 
@@ -31,6 +31,7 @@ for i, det in enumerate(pred):
     if len(det):
         det[:, :4] = scale_coords((640, 640, 3), det[:, :4], (max_size, max_size, 3)).round()
     for *xyxy, conf, cls in reversed(det):
+        print(cls)
         xtl = float(xyxy[0])
         ytl = float(xyxy[1])
         xbr = float(xyxy[2])
