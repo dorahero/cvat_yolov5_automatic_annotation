@@ -308,6 +308,10 @@ spec:
     baseImage: dorahero2727/cvat-cu11:v1
 
     directives:
+      preCopy:
+        - kind: WORKDIR
+          value: /opt/nuclio
+
       postCopy:
         - kind: RUN
           value: export CUDA_VISIBLE_DEVICES=1
