@@ -11,7 +11,7 @@ from utils.datasets import letterbox
 from model_loader import ModelLoader
 import os 
 
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 model_path = "/opt/nuclio/model.pb"
 model_handler = ModelLoader(model_path)
 functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))
