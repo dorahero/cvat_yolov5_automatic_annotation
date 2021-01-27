@@ -304,7 +304,7 @@ spec:
   eventTimeout: 30s
 
   build:
-    image: dorahero2727/yolov5-cvat:v2
+    image: dorahero2727/cvat-cu11:v2
     baseImage: dorahero2727/cvat-cu11:v1
 
     directives:
@@ -313,6 +313,8 @@ spec:
           value: /opt/nuclio
 
       postCopy:
+        - kind: RUN
+          value: pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
         - kind: RUN
           value: export CUDA_VISIBLE_DEVICES=1
 
