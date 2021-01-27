@@ -9,12 +9,12 @@ from utils.general import non_max_suppression, scale_coords
 from utils.plots import plot_one_box
 from utils.datasets import letterbox
 
-with open('function_car.yaml') as f:
+with open('function.yaml') as f:
     names_json = yaml.load(f, Loader=yaml.FullLoader)['metadata']['annotations']['spec']  # class names (assume COCO)
 names = [item['name'] for item in json.loads(names_json)]
 colors = [[0, 0, 255]]
 # tf.disable_v2_behavior()
-model_path = "car288_0121_last.pb"
+model_path = "model.pb"
 img0 = cv2.imread("zinger_2016_gray_20201027_01_n-00089.jpg")
 def wrap_frozen_graph(graph_def, inputs, outputs):
     def _imports_graph_def():
