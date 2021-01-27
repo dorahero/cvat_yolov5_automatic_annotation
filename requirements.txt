@@ -29,7 +29,6 @@ numpy==1.19.5
 oauthlib==3.1.0
 opencv-python==4.5.1.48
 opt-einsum==3.3.0
-pandas==1.2.0
 Pillow==8.1.0
 protobuf==3.14.0
 pyasn1==0.4.8
@@ -42,11 +41,11 @@ PyYAML==5.3.1
 requests==2.25.1
 requests-oauthlib==1.3.0
 rsa==4.6
-scipy==1.6.0
 seaborn==0.11.1
 six==1.15.0
 tensorboard==2.4.0
 tensorboard-plugin-wit==1.7.0
+tensorflow-gpu==2.4.0
 tensorflow==2.4.0
 tensorflow-estimator==2.4.0
 termcolor==1.1.0

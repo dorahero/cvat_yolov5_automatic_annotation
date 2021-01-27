@@ -37,7 +37,7 @@ class ModelLoader:
         # image_np = np.expand_dims(image_np, axis=0)
         back_size = max(width, height)
         back = np.zeros((back_size, back_size, 3))     
-        back[:width, :height] = image_np 
+        back[:height, :width] = image_np 
         # cv2.imwrite('test.jpg', back)
         imgsz = 640
         img = torch.zeros((1, 3, imgsz, imgsz), device=torch.device('cuda:0'))
@@ -51,7 +51,7 @@ class ModelLoader:
         img /= 255.0  # 0 - 255 to 0.0 - 1.0
         if img.ndimension() == 3:
             img = img.unsqueeze(0)
-        image_np = tf.constant(img.permute(0, 2, 3, 1).cpu().numpy())
+        image_np = img.permute(0, 2, 3, 1).cpu().numpy()
         # if width > 1920 or height > 1080:
         #     image = image.resize((width // 2, height // 2), Image.ANTIALIAS)
         # image_np = np.array(image.getdata())[:, :3].reshape(

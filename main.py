@@ -5,6 +5,7 @@ from PIL import Image
 import yaml
 from model_loader import ModelLoader
 from utils.general import non_max_suppression, scale_coords
+import torch
 
 
 
@@ -13,7 +14,7 @@ def init_context(context):
     model_path = "/opt/nuclio/faster_rcnn/car288_0121_last.pb"
     model_handler = ModelLoader(model_path)
     setattr(context.user_data, 'model_handler', model_handler)
-    functionconfig = yaml.safe_load(open("/opt/nuclio/function_car.yaml"))
+    functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))
     labels_spec = functionconfig['metadata']['annotations']['spec']
     labels = {item['_id']: item['name'] for item in json.loads(labels_spec)}
     setattr(context.user_data, "labels", labels)
@@ -25,10 +26,10 @@ def handler(context, event):
     buf = io.BytesIO(base64.b64decode(data["image"].encode('utf-8')))
     threshold = float(data.get("threshold", 0.5))
     image = Image.open(buf)
-    w, h = image.shape
+    w, h = image.size
     max_size = max(w, h)
 
-    pred = context.user_data.model_handler.infer(image).numpy()
+    pred = context.user_data.model_handler.infer(image)
     pred[..., :4] *= 640
     pred = torch.tensor(pred)
     pred = non_max_suppression(pred, 0.5, 0.45, agnostic=False)
@@ -38,10 +39,10 @@ def handler(context, event):
         if len(det):
             det[:, :4] = scale_coords((640, 640, 3), det[:, :4], (max_size, max_size, 3)).round()
         for *xyxy, conf, cls in reversed(det):
-            xtl = xyxy[1]
-            ytl = xyxy[0]
-            xbr = xyxy[3]
-            ybr = xyxy[2]
+            xtl = float(xyxy[1])
+            ytl = float(xyxy[0])
+            xbr = float(xyxy[3])
+            ybr = float(xyxy[2])
             obj_score = str(conf)
             obj_class = int(cls)
             obj_label = context.user_data.labels.get(obj_class, "unknown")

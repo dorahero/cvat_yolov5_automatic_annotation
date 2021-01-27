@@ -62,7 +62,7 @@ pred = frozen_func(x=tf.constant(img.permute(0, 2, 3, 1).cpu().numpy())).numpy()
 pred[..., :4] *= imgsz
 pred = torch.tensor(pred)
 pred = non_max_suppression(pred, 0.5, 0.45, agnostic=False)
-print(pred)
+# print(pred)
 for i, det in enumerate(pred): 
     if len(det):
         # Rescale boxes from img_size to im0 size
@@ -77,8 +77,8 @@ for i, det in enumerate(pred):
             print(xyxy)
             label = f'{names[int(cls)]} {conf:.2f}'
             plot_one_box(xyxy, img0, label=label, color=colors[0], line_thickness=3)
-            print(img.shape)
-            print(im0.shape)
+            # print(img.shape)
+            # print(im0.shape)
 # im0_o = cv2.resize(img0, (640, 480)) 
 # cv2.imshow('1', im0_o)
 # cv2.waitKey()
