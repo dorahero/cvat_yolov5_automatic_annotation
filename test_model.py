@@ -17,7 +17,7 @@ model_handler = ModelLoader(model_path)
 functionconfig = yaml.safe_load(open("function.yaml"))
 labels_spec = functionconfig['metadata']['annotations']['spec']
 labels = {item['_id']: item['name'] for item in json.loads(labels_spec)}
-image = Image.open('tiida5d_2006_metal_20201029_01_n-00003.jpg')
+image = Image.open('livina_2007_white_20201027_03_n-00083.jpg')
 w, h = image.size
 max_size = max(w, h)
 
