@@ -15,7 +15,7 @@ docker-compose -f docker-compose.yml -f components/serverless/docker-compose.ser
 ```
 ## automatic-annotation
 ```shell
-docker build -t dorahero2727/cvat-cu11:v1 .
+docker build -t dorahero2727/cvat-cu10:v1 .
 nuctl create project cvat
-nuctl deploy tf-yolov5-gpu   --project-name cvat --path "serverless/tensorflow/yolov5/nuclio" --platform local   --base-image  dorahero2727/cvat-cu11:v1   --desc "YOLOv5 tensorflow" -i dorahero2727/cvat-cu11:v2 --resource-limit nvidia.com/gpu=1
+nuctl deploy tf-yolov5-gpu   --project-name cvat --path "serverless/tensorflow/yolov5/nuclio" --platform local   --base-image  dorahero2727/cvat-cu10:v1   --desc "YOLOv5 tensorflow" -i dorahero2727/cvat-cu11:v2 --resource-limit nvidia.com/gpu=1
 ```
