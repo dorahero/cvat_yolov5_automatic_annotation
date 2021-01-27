@@ -9,7 +9,9 @@ from utils.general import non_max_suppression, scale_coords
 from utils.plots import plot_one_box
 from utils.datasets import letterbox
 from model_loader import ModelLoader
+import os 
 
+os.environ["CUDA_VISIBLE_DEVICES"]="1"
 model_path = "/opt/nuclio/model.pb"
 model_handler = ModelLoader(model_path)
 functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))
