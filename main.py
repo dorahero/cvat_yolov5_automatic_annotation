@@ -11,7 +11,7 @@ import torch
 
 def init_context(context):
     context.logger.info("Init context...  0%")
-    model_path = "/opt/nuclio/faster_rcnn/car288_0121_last.pb"
+    model_path = "/opt/nuclio/model.pb"
     model_handler = ModelLoader(model_path)
     setattr(context.user_data, 'model_handler', model_handler)
     functionconfig = yaml.safe_load(open("/opt/nuclio/function.yaml"))

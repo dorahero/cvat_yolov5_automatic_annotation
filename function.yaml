@@ -313,7 +313,7 @@ spec:
 
   triggers:
     myHttpTrigger:
-      maxWorkers: 2
+      maxWorkers: 1 
       kind: 'http'
       workerAvailabilityTimeoutMilliseconds: 10000
       attributes:
