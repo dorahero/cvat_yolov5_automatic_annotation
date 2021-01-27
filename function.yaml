@@ -304,7 +304,7 @@ spec:
   eventTimeout: 30s
 
   build:
-    image: dorahero2727/yolov5-cvat:v2
+    image: dorahero2727/cvat-cu10:v2
     baseImage: dorahero2727/cvat-cu10:v1
 
     directives:
