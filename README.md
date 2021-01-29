@@ -1,4 +1,4 @@
-# licencse plate detect
+# cvat automatic-annotation with yolov5
 - [x] yolov5
 - [x] cvat
 - [x] tensorflow
